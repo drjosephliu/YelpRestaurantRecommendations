@@ -46,6 +46,7 @@ public class Graph {
 
 	
 	public UserNode getUser(String userId) {
-		if (userSet.contains(o))
+	//	if (userSet.contains(o))
+		return null;
 	}
 }
