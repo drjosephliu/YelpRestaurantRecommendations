@@ -41,13 +41,12 @@ public class Graph {
 	 */
 	public void bfs(String userId, double rating) {
 		// TODO
-		// my change
+		// these are changes from joseph
 	}
 
 	
 	public UserNode getUser(String userId) {
-	//	if (userSet.contains(o))
-		//modifications
-		return null;
+		UserNode user1 = new UserNode("Joseph", "Shake shack", 5.0);
+		return user1;
 	}
 }
