@@ -25,6 +25,7 @@ public class Graph {
 	 */
 	public void addEdge(String userId, String restaurantId, double rating) {
 		// TODO
+		// this is another change
 	}
 	
 	/**
@@ -40,5 +41,9 @@ public class Graph {
 	 */
 	public void bfs(String userId, double rating) {
 		// TODO
+	}
+	
+	public UserNode getUser(String userId) {
+		if (userSet.contains(o))
 	}
 }
