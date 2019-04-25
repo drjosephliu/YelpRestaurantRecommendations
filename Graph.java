@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * This class represents a graph of user and restaurant nodes.
  * @author Keenan Park
- * haha
+ * 
  */
 
 public class Graph {
@@ -41,7 +41,9 @@ public class Graph {
 	 */
 	public void bfs(String userId, double rating) {
 		// TODO
+		// my change
 	}
+
 	
 	public UserNode getUser(String userId) {
 		if (userSet.contains(o))
