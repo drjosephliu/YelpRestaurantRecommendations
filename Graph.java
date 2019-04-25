@@ -26,6 +26,7 @@ public class Graph {
 	public void addEdge(String userId, String restaurantId, double rating) {
 		// TODO
 		// this is another change
+		// this is Rongrong's change
 	}
 	
 	/**
@@ -47,6 +48,9 @@ public class Graph {
 	
 	public UserNode getUser(String userId) {
 	//	if (userSet.contains(o))
+	// this is another Rongrong's change
 		return null;
 	}
 }
+
+// I am everywhere
