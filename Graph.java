@@ -46,7 +46,7 @@ public class Graph {
 
 	
 	public UserNode getUser(String userId) {
-	//	if (userSet.contains(o))
-		return null;
+		UserNode user1 = new UserNode("Joseph", "Shake shack", 5.0);
+		return user1;
 	}
 }
