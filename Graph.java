@@ -42,7 +42,7 @@ public class Graph {
 	 */
 	public void bfs(String userId, double rating) {
 		// TODO
-		// my change
+		// these are changes from joseph
 	}
 
 	
