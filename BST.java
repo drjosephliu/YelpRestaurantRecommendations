@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * 
  * @author TheSuperbGarfield
@@ -10,8 +12,8 @@ public class BST {
 	 * This is the constructor that takes in a BSTNode2 and sets it as the root
 	 * @param root
 	 */
-	public BST(BSTNode root) {
-		
+	public BST() {
+		root = null;
 	}
 	
 	/**
@@ -59,6 +61,15 @@ public class BST {
 	 * @return
 	 */
 	private RestaurantWrapper findHelper(BSTNode root, RestaurantWrapper key) {
+		return null;
+	}
+	
+	/**
+	 * Return a list of recommended restaurants equal or above a certain rating
+	 * @param threshold is threshold rating
+	 * @return list of recommended restaurants that meet the threshold
+	 */
+	public List<RestaurantWrapper> findThreshold(double threshold) {
 		return null;
 	}
 	
