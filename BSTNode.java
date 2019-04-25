@@ -5,6 +5,12 @@ public class BSTNode {
 	private BSTNode left;
 	private BSTNode right;
 	
+	public BSTNode() {
+		this.restaurant = null;
+		this.left = null;
+		this.right = null;
+	}
+	
 	public BSTNode(RestaurantWrapper restaurant) {
 		this.restaurant = restaurant;
 		this.left = null;
@@ -17,7 +23,7 @@ public class BSTNode {
 		this.right = right;
 	}
 	
-	public RestaurantWrapper getRestaurant() {
+	public RestaurantWrapper getRestaurantWrapper() {
 		return restaurant;
 	}
 	

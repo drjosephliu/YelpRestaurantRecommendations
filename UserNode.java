@@ -14,7 +14,6 @@ public class UserNode implements INode {
         ratings.put(restaurantID, rating);
     }
     
-	@Override
 	public boolean isUser() {
 		return false;
 	}

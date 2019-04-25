@@ -13,7 +13,6 @@ public class RestaurantNode implements INode {
         ratings.put(userID, rating);
     }
     
-	@Override
 	public boolean isUser() {
 		return true;
 	}
