@@ -35,7 +35,7 @@ public class runner {
 				} else {
 					for(int ii = 0; ii < recs.size(); ii ++) {
 						RestaurantWrapper rw = recs.get(ii);
-						System.out.println("recommendation: " + rw.getID() + ", avgRating: " + rw.getAvgRating() + ", corating: " + rw.getAvgRating());
+						System.out.println("recommendation: " + rw.getID() + ", avgRating: " + rw.getRestaurant().getAvgRating() + ", corating: " + rw.getAvgRating());
 					}
 				}
 				//TODO: printout list of restaurants

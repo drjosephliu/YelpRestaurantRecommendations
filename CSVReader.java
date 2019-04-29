@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class CSVReader {
 	
-  List<Graph> reviews;
-  static BufferedReader br;
+  private List<Graph> reviews;
+  private BufferedReader br;
 
 	public CSVReader() {
 		reviews = new ArrayList<Graph>();
