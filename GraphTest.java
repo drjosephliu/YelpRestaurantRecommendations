@@ -82,10 +82,14 @@ public class GraphTest {
 	
 	@Test
 	public void testGetRecommendationsWithMinRating() {
+		final String user5 = "5th user";
+		graph.addEdge(user5, rest5, 4.0);
+		assertEquals(0, graph.getRecommendationsWithMinRating(user5, 3.0).size());
 		graph.addEdge(user2, rest5, 2.5);
 		graph.addEdge(user3, rest6, 3.6);
 		
 		assertEquals(1, graph.getRecommendationsWithMinRating(user1, 3.0).size());
+		assertEquals(2, graph.getRecommendationsWithMinRating(user1, 2.0).size());
 		assertEquals(2, graph.getRecommendationsWithMinRating(user1, 2.0).size());
 	}
 	
@@ -111,7 +115,9 @@ public class GraphTest {
 		graph.addEdge(user4, rest9, 4.4);
 		graph.addEdge(user4, rest10, 4.6);
 		
+		assertEquals(5, graph.getRecommendationsWithMinCoReviewers(user1, 3).size());
+		assertEquals(5, graph.getRecommendationsWithMinCoReviewers(user1, 3).size());
 		
-		assertEquals(5, graph.getRecommendationsWithMinCoReviewers(user1, 3));
+		
 	}
 }
