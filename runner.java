@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class runner {
@@ -28,7 +29,15 @@ public class runner {
 				System.out.println("thredhold must be between 0 to 5");
 			}
 			else {
-				g.getRecommendationsWithMinRating(userID, thredhold); 
+				List<RestaurantWrapper> recs = g.getRecommendationsWithMinRating(userID, thredhold);
+				if(recs.size() == 0) {
+					System.out.println("No recommendations found!");
+				} else {
+					for(int ii = 0; ii < recs.size(); ii ++) {
+						RestaurantWrapper rw = recs.get(ii);
+						System.out.println("recommendation: " + rw.getID() + ", avgRating: " + rw.getAvgRating() + ", corating: " + rw.getAvgRating());
+					}
+				}
 				//TODO: printout list of restaurants
 			}
 			System.out.println("Would you like another try? Enter Y or N:");
