@@ -48,7 +48,9 @@ public class RestaurantNode implements INode {
 			}
 			avgRating = sumRatings / ratings.size();
 		}
-		avgRating = 0.0;
+		else {
+			avgRating = 0.0;
+		}
 		return avgRating;
 	}
 	
