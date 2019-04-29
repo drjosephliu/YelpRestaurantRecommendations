@@ -10,14 +10,15 @@ public class CSVReaderTest {
 	
 	@Test
 	public void testReadCSV(){
+		CSVReader reader = new CSVReader();
 		try {
-			CSVReader.readCSV("fake_file.csv");
+			reader.readCSV("fake_file.csv");
 		} catch (Exception e){
 			assertTrue(e instanceof FileNotFoundException);
 		}
 		Graph g;
 		try{
-			CSVReader.readCSV("yelp_subset_cleaned.csv");
+			reader.readCSV("yelp_subset_cleaned.csv");
 		} catch(Exception e) {
 			
 		}

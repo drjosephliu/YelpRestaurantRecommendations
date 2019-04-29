@@ -25,7 +25,7 @@ public class CSVReader {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static Graph readCSV(String filename) throws FileNotFoundException, IOException {
+	public Graph readCSV(String filename) throws FileNotFoundException, IOException {
 		Graph g = new Graph();
 		br = new BufferedReader(new FileReader(filename));
 		br.readLine(); // throw away header
