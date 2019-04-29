@@ -1,4 +1,3 @@
-//owner: Chris
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -27,7 +26,20 @@ public class CSVReader {
 	 * @throws IOException
 	 */
 	public static Graph readCSV(String filename) throws FileNotFoundException, IOException {
-		// TODO: Auto-generated method stub
-        return null;
+		Graph g = new Graph();
+		br = new BufferedReader(new FileReader(filename));
+		br.readLine(); // throw away header
+		String line = "";
+		String tokens[];
+		String del = ",";
+		while((line = br.readLine()) != null){
+			tokens = line.split(del); // first token is index (thrown away)
+			String userId = tokens[1].substring(1,tokens[1].length()-1); // second token is user_id
+			String restaurantId = tokens[2].substring(1,tokens[2].length()-1); // third token is restaurant_id
+			String ratingStr = tokens[3]; // fourth token is rating
+			int rating = Integer.parseInt(ratingStr);
+			g.addEdge(userId, restaurantId, rating);
+		}
+        return g;
     }
 }

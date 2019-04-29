@@ -17,6 +17,10 @@ public class GraphTest {
 	private final String rest4 = "Shakeshack";
 	private final String rest5 = "McDonald's";
 	private final String rest6 = "Blaze Pizza";
+	private final String rest7 = "Terakawa";
+	private final String rest8 = "Pho Street";
+	private final String rest9 = "Baby Blues BBQ";
+	private final String rest10 = "White Dog";
 	
 	@Before
 	public void setup() {
@@ -78,10 +82,36 @@ public class GraphTest {
 	
 	@Test
 	public void testGetRecommendationsWithMinRating() {
-		graph.addEdge(user2,  rest5,  2.5);
+		graph.addEdge(user2, rest5, 2.5);
 		graph.addEdge(user3, rest6, 3.6);
 		
 		assertEquals(1, graph.getRecommendationsWithMinRating(user1, 3.0).size());
 		assertEquals(2, graph.getRecommendationsWithMinRating(user1, 2.0).size());
+	}
+	
+	@Test
+	public void testGetRecommendationsWithMinCoReviewers() {
+		graph.addEdge(user2, rest5, 2.5);
+		graph.addEdge(user2, rest6, 4.8);
+		graph.addEdge(user2, rest7, 3.9);
+		graph.addEdge(user2, rest8, 4.7);
+		graph.addEdge(user2, rest9, 5.0);
+		graph.addEdge(user2, rest10, 3.3);
+		
+		graph.addEdge(user3, rest6, 3.6);
+		graph.addEdge(user3, rest7, 3.3);
+		graph.addEdge(user3, rest8, 3.9);
+		graph.addEdge(user3, rest9, 4.1);
+		graph.addEdge(user3, rest10, 4.4);
+		
+		graph.addEdge(user4, rest5, 2.1);
+		graph.addEdge(user4, rest6, 3.5);
+		graph.addEdge(user4, rest7, 2.9);
+		graph.addEdge(user4, rest8, 3.9);
+		graph.addEdge(user4, rest9, 4.4);
+		graph.addEdge(user4, rest10, 4.6);
+		
+		
+		assertEquals(5, graph.getRecommendationsWithMinCoReviewers(user1, 3));
 	}
 }

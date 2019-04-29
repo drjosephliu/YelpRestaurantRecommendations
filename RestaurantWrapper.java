@@ -50,7 +50,9 @@ public class RestaurantWrapper implements Comparable<RestaurantWrapper> {
 			}
 			avgRating = sumRatings / ratingsByCoReviewers.size();
 		}
-		avgRating = 0.0;
+		else {
+			avgRating = 0.0;
+		}
 		return avgRating;
 	}
 	

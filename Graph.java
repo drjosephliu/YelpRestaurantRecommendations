@@ -91,6 +91,36 @@ public class Graph {
 		return recommendations.findThreshold(rating);
 	}
 	
+	public List<RestaurantWrapper> getRecommendationsWithMinCoReviewers(String userID, int numCoReviewers) {
+		UserNode user = getUser(userID);
+		BST recommendations;
+		
+		if (user.getRecommendationsBST() == null) {
+			recommendations = bfs(userID);
+		}
+		else {
+			recommendations = user.getRecommendationsBST();
+		}
+		
+		List<RestaurantWrapper> recommendationsList = findRecommendationsMinCoReviewerHelper(recommendations.root, numCoReviewers);
+		return recommendationsList;
+	}
+	
+	public List<RestaurantWrapper> findRecommendationsMinCoReviewerHelper(BSTNode root, int numCoReviewers) {
+		if (root == null) {
+			return new ArrayList<RestaurantWrapper>();
+		}
+		List<RestaurantWrapper> recommendations = new ArrayList<>();
+		
+		if (root.getRestaurantWrapper().getRatingsByCoReviewers().size() >= numCoReviewers) {
+			recommendations.add(root.getRestaurantWrapper());
+		}
+		recommendations.addAll(findRecommendationsMinCoReviewerHelper(root.getLeft(), numCoReviewers));
+		recommendations.addAll(findRecommendationsMinCoReviewerHelper(root.getRight(), numCoReviewers));
+		
+		return recommendations;
+	}
+	
 	/**
 	 * A breadth first search populates the recommendationsBST
 	 * instance variable in a given UserNode (identified by userId).
@@ -135,7 +165,7 @@ public class Graph {
 					for (INode node : neighbours) {
 						if (!visitedNodes.contains(node)) {
 							RestaurantNode restaurant = (RestaurantNode) node;	
-							System.out.println("recommendation: " + restaurant.getID());
+							
 							
 							RestaurantWrapper rw;
 							if (!recommendations.containsKey(restaurant.getID())) {
@@ -147,6 +177,7 @@ public class Graph {
 							
 							// Store each co-reviewers rating of the recommendeded restaurant
 							rw.addRating(coReviewer.getID(), coReviewer.getRating(restaurant.getID()));
+							System.out.println("recommendation: " + rw.getID() + ", avgRating: " + rw.getAvgRating() + ", corating: " + coReviewer.getRating(restaurant.getID()));
 							recommendations.put(restaurant.getID(), rw);
 						}
 					}
@@ -177,7 +208,7 @@ public class Graph {
 		userNode.addRecommendationsBST(recommendationsBST);
 		
 		return recommendationsBST;
-	}
+	} 
 
 	/**
 	 * Returns user node with corresponding id
