@@ -21,6 +21,15 @@ public class BST {
 	}
 
 	/**
+	 * This returns the number of nodes in the BST.
+	 * 
+	 * @return nodeCount
+	 */
+	public int size() {
+		return nodeCount;
+	}
+	
+	/**
 	 * This method creates a BSTNode2 from a RestaurantWrapper. If the
 	 * RestaurantWrapper doesn't already exist in the BST, it gets inserted in the
 	 * appropriate location. If it already exists, nothing is done.
