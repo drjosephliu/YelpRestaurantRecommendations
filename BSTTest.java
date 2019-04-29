@@ -14,6 +14,12 @@ public class BSTTest {
 		test.insert(key);
 		assertEquals(test.find(key), key);
 	}
+	
+	@Test
+	public void sizeTest() {
+		BST test = new BST();
+		assertEquals(0, test.size());
+	}
 
 	@Test
 	public void testRemove() {
@@ -32,6 +38,23 @@ public class BSTTest {
 		
 	}
 
+	@Test
+	public void testRemove2() {
+		BST test = new BST();
+		RestaurantWrapper[] keys = new RestaurantWrapper[10];
+		Random rand = new Random();
+		for (int i = 0; i < keys.length; i++) {
+			keys[i] = new RestaurantWrapper(new RestaurantNode("1" + i, "user1", 4.0));
+			keys[i].addRating("" + i, rand.nextDouble() * 5);
+			test.insert(keys[i]);
+		}
+		
+		for (int i = 0; i < keys.length; i++) {
+			assertEquals(keys[i], test.remove(keys[i]));
+		}
+	}
+	
+	
 	@Test
 	public void testFind() {
 		BST test = new BST();
