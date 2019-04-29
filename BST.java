@@ -155,8 +155,7 @@ public class BST {
 	private void inOrderTraversal(BSTNode root, List<RestaurantWrapper> list, double threshold) {
 		if (root == null) {
 			return;
-		}
-		System.out.println("root: " + root.getRestaurantWrapper().getAvgRating() + ", threshold: " + threshold);	
+		}	
 		if (threshold <= root.getRestaurantWrapper().getAvgRating()) {
 			inOrderTraversal(root.getLeft(), list, threshold);
 			list.add(root.getRestaurantWrapper());
