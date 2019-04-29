@@ -201,7 +201,7 @@ public class Graph {
 		// Create BST
 		BST recommendationsBST = new BST();
 		for (RestaurantWrapper recommendation : recommendations.values()) {
-			System.out.println("recommmendation: " + recommendation.getID() + ", avgRating: " + recommendation.getAvgRating());
+	//		System.out.println("recommendation: " + recommendation.getID() + ", avgRating: " + recommendation.getAvgRating());
 			recommendationsBST.insert(recommendation);
 		}
 		// Store recommendations in user's node
