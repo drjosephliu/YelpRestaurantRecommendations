@@ -9,13 +9,18 @@ public class CSVReaderTest {
 
 	
 	@Test
-	public void testReadCSV() throws FileNotFoundException, IOException {
+	public void testReadCSV(){
 		try {
 			CSVReader.readCSV("fake_file.csv");
 		} catch (Exception e){
 			assertTrue(e instanceof FileNotFoundException);
 		}
-		Graph g = CSVReader.readCSV("yelp_subset2.csv");
+		Graph g;
+		try{
+			CSVReader.readCSV("yelp_subset_cleaned.csv");
+		} catch(Exception e) {
+			
+		}
 		
 	}
 
