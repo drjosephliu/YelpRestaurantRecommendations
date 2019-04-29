@@ -106,7 +106,7 @@ public class Graph {
 		return recommendationsList;
 	}
 	
-	public List<RestaurantWrapper> findRecommendationsMinCoReviewerHelper(BSTNode root, int numCoReviewers) {
+	private List<RestaurantWrapper> findRecommendationsMinCoReviewerHelper(BSTNode root, int numCoReviewers) {
 		if (root == null) {
 			return new ArrayList<RestaurantWrapper>();
 		}
@@ -177,7 +177,6 @@ public class Graph {
 							
 							// Store each co-reviewers rating of the recommendeded restaurant
 							rw.addRating(coReviewer.getID(), coReviewer.getRating(restaurant.getID()));
-							System.out.println("recommendation: " + rw.getID() + ", avgRating: " + rw.getAvgRating() + ", corating: " + coReviewer.getRating(restaurant.getID()));
 							recommendations.put(restaurant.getID(), rw);
 						}
 					}
@@ -195,13 +194,12 @@ public class Graph {
 		}
 		
 		if (recommendations.isEmpty()) {
-			throw new NullPointerException("No recommendations found");
+			System.out.println("Sorry no recommendations found");
 		}
 		
 		// Create BST
 		BST recommendationsBST = new BST();
 		for (RestaurantWrapper recommendation : recommendations.values()) {
-			System.out.println("recommmendation: " + recommendation.getID() + ", avgRating: " + recommendation.getAvgRating());
 			recommendationsBST.insert(recommendation);
 		}
 		// Store recommendations in user's node
