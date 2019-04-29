@@ -9,8 +9,14 @@ import java.util.*;
 public class Graph {
 	
 	private HashMap<INode, ArrayList<INode>> adjList;
-	private HashSet<UserNode> userSet;
-	private HashSet<RestaurantNode> restaurantSet; 
+	private HashMap<String, UserNode> users;
+	private HashMap<String, RestaurantNode> restaurants; 
+	
+	public Graph() {
+		adjList = new HashMap<>();
+		users = new HashMap<>();
+		restaurants = new HashMap<>();
+	}
 	
 	/**
 	 * Add an edge to the graph. An edge between UserNodes
@@ -24,9 +30,65 @@ public class Graph {
 	 * @param rating
 	 */
 	public void addEdge(String userId, String restaurantId, double rating) {
-		// TODO
-		// this is another change
-		// this is Rongrong's change
+		
+		UserNode userNode;
+		
+		if (!users.containsKey(userId)) {
+			userNode = new UserNode(userId, restaurantId, rating);
+		}
+		else {
+			userNode = users.get(userId);
+		}
+		
+		RestaurantNode restaurantNode;
+		
+		if (!restaurants.containsKey(restaurantId)) {
+			restaurantNode = new RestaurantNode(restaurantId, userId, rating);
+		}
+		else {
+			restaurantNode = restaurants.get(restaurantId);
+		}
+		
+		userNode.addRating(restaurantId, rating);
+		restaurantNode.addRating(userId, rating);
+		
+		users.put(userNode.getID(), userNode);
+		restaurants.put(restaurantNode.getID(), restaurantNode);
+		
+		addNodeToAdjList((INode) userNode, (INode) restaurantNode);
+		addNodeToAdjList((INode) restaurantNode, (INode) userNode);
+	}
+	
+	private void addNodeToAdjList(INode node1, INode node2) {
+		ArrayList<INode> node1Neighbours;
+		if (!adjList.containsKey(node1)) {
+			node1Neighbours = new ArrayList<>();
+		}
+		else {
+			node1Neighbours = adjList.get(node1);
+		}
+		node1Neighbours.add(node2);
+		adjList.put(node1, node1Neighbours);
+	}
+	
+	/**
+	 * Find recommendations for a user that meet a minimum rating threshold
+	 * @param userID 
+	 * @param rating
+	 * @return list of restaurants that are greater than or equal to rating
+	 */
+	public List<RestaurantWrapper> getRecommendationsWithMinRating(String userID, double rating) {
+		UserNode user = getUser(userID); 
+		BST recommendations;
+		
+		if (user.getRecommendationsBST() == null) { 
+			recommendations = bfs(userID);
+		}
+		else {
+			recommendations = user.getRecommendationsBST();
+		}
+		
+		return recommendations.findThreshold(rating);
 	}
 	
 	/**
@@ -40,17 +102,111 @@ public class Graph {
 	 * @param userId
 	 * @return ArrayList of restaurants
 	 */
-	public void bfs(String userId, double rating) {
-		// TODO
-		// these are changes from joseph
+	private BST bfs(String userId) {
+		
+		UserNode userNode = getUser(userId);
+		
+		Queue<INode> queue = new LinkedList<>();
+		Set<INode> visitedNodes = new HashSet<>();
+		HashMap<String, RestaurantWrapper> recommendations = new HashMap<>();
+		
+		queue.add(userNode);
+		
+		int hops = 0;
+		
+		// 1 hop = restaurants you've reviewed; 
+		// 2 hops = co-reviewers
+		// 3 hops = recommended restaurants
+		while (hops < 3) {
+			Queue<INode> queue2 = new LinkedList<>();
+			
+			while (!queue.isEmpty()) {
+				INode nextNode = queue.poll();
+				visitedNodes.add(nextNode);
+			
+				ArrayList<INode> neighbours = adjList.get(nextNode);
+				
+				// Hops == 2 are the co-reviewers
+				if (hops == 2 && nextNode.isUser()) {
+					
+					UserNode coReviewer = (UserNode) nextNode;
+					
+					// These are the recommendations
+					for (INode node : neighbours) {
+						if (!visitedNodes.contains(node)) {
+							RestaurantNode restaurant = (RestaurantNode) node;	
+							System.out.println("recommendation: " + restaurant.getID());
+							
+							RestaurantWrapper rw;
+							if (!recommendations.containsKey(restaurant.getID())) {
+								rw = new RestaurantWrapper(restaurant);
+							}
+							else {
+								rw = recommendations.get(restaurant.getID());
+							}
+							
+							// Store each co-reviewers rating of the recommendeded restaurant
+							rw.addRating(coReviewer.getID(), coReviewer.getRating(restaurant.getID()));
+							recommendations.put(restaurant.getID(), rw);
+						}
+					}
+				}
+				
+				for (INode neighbour : neighbours) {
+					if (!visitedNodes.contains(neighbour)) {
+						queue2.add(neighbour);
+					}
+				}
+			}
+			
+			queue.addAll(queue2);
+			hops++;
+		}
+		
+		if (recommendations.isEmpty()) {
+			throw new NullPointerException("No recommendations found");
+		}
+		
+		// Create BST
+		BST recommendationsBST = new BST();
+		for (RestaurantWrapper recommendation : recommendations.values()) {
+			System.out.println("recommmendation: " + recommendation.getID() + ", avgRating: " + recommendation.getAvgRating());
+			recommendationsBST.insert(recommendation);
+		}
+		// Store recommendations in user's node
+		userNode.addRecommendationsBST(recommendationsBST);
+		
+		return recommendationsBST;
 	}
 
-	
+	/**
+	 * Returns user node with corresponding id
+	 * @param userId
+	 * @return UserNode with userId
+	 */
 	public UserNode getUser(String userId) {
-	//	if (userSet.contains(o))
-	// this is another Rongrong's change
-		return null;
+		if (!users.containsKey(userId)) {
+			throw new IllegalArgumentException("User not found");
+		}
+		return users.get(userId);
+	}
+	
+	public HashMap<String, UserNode> getUsers() {
+		return users; 
+	}
+	
+	public RestaurantNode getRestaurant(String restaurantId) {
+		if(!restaurants.containsKey(restaurantId)) {
+			throw new IllegalArgumentException("Restaurant not found");
+		}
+		return restaurants.get(restaurantId);
+	}
+	
+	public HashMap<String, RestaurantNode> getRestaurants() {
+		return restaurants;
+	}
+	
+	public HashMap<INode, ArrayList<INode>> getAdjList() {
+		return adjList;
 	}
 }
-
-// I am everywhere
