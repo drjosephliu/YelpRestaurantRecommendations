@@ -83,8 +83,6 @@ public class BST {
 	 * @return
 	 */
 	private BSTNode removeHelper(BSTNode root, RestaurantWrapper key) {
-		if (root == null)
-			return null;
 		if (root.getRestaurantWrapper().compareTo(key) < 0) {
 			root.setRight(removeHelper(root.getRight(), key));
 		} else if (root.getRestaurantWrapper().equals(key)) {
