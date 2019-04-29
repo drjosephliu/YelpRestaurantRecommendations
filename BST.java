@@ -65,6 +65,14 @@ public class BST {
 		return temp;
 	}
 
+	/**
+	 * This is a recursive helper method for removing a RestaurantWrapper
+	 * from the BST.
+	 * 
+	 * @param root
+	 * @param key
+	 * @return
+	 */
 	private BSTNode removeHelper(BSTNode root, RestaurantWrapper key) {
 		if (root == null)
 			return null;
@@ -128,6 +136,15 @@ public class BST {
 		return ret;
 	}
 
+	/**
+	 * This method performs an in order traversal for nodes with average rating
+	 * greater than or equal to the threshold. The list parameter is populated
+	 * with the RestaurantWrappers encapsulated by each node.
+	 * 
+	 * @param root
+	 * @param list
+	 * @param threshold
+	 */
 	private void inOrderTraversal(BSTNode root, List<RestaurantWrapper> list, double threshold) {
 		if (root == null) {
 			return;

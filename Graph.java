@@ -200,6 +200,7 @@ public class Graph {
 		// Create BST
 		BST recommendationsBST = new BST();
 		for (RestaurantWrapper recommendation : recommendations.values()) {
+
 			recommendationsBST.insert(recommendation);
 		}
 		// Store recommendations in user's node
