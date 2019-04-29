@@ -194,7 +194,7 @@ public class Graph {
 		}
 		
 		if (recommendations.isEmpty()) {
-			System.out.println("Sorry no recommendations found");
+	//		System.out.println("Sorry no recommendations found");
 		}
 		
 		// Create BST
