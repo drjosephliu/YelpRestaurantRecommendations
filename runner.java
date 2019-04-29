@@ -14,7 +14,7 @@ public class runner {
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		CSVReader reader = new CSVReader();
-		//Graph g = reader.readCSV(args[0]);
+		Graph g = reader.readCSV(args[0]);
 		String flag = "Y";
 		System.out.println("Welcome to Restaruant Recommendation System");		
 		while (flag.equals("Y")) {
@@ -28,8 +28,7 @@ public class runner {
 				System.out.println("thredhold must be between 0 to 5");
 			}
 			else {
-				//g.getRecommendationsWithMinRating(userID, thredhold); 
-				System.out.println("The restaurant recommended to" + userID +" is");
+				g.getRecommendationsWithMinRating(userID, thredhold); 
 				//TODO: printout list of restaurants
 			}
 			System.out.println("Would you like another try? Enter Y or N:");
@@ -37,9 +36,8 @@ public class runner {
 		}
 		System.out.println("Thank you for using the recommendation System");
 		
-		//the user had two reviews, both with 4 star
-		//restaurant "IMnTtFn3c5qZ7gW0gWqPzA", "omCROJcbZC1qqdQw47LRQA"
-		//11 people reviewed the first rest, 9 people reviewed the second rest 
+		//user "RQU7dwZTdCLfy7DQU2TYlQ" no rec found as he only reviews one rest and he is the only one who reviewed the rest 
+		//user "4OrFB2TDRsbokoYMhUf1EA" reviewed rest VeiGa7h8p1I2yAIfgZjgtw
 		
 		
 		
