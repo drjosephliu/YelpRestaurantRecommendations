@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class runner {
 
 /**
- * This is the main funtion .
+ * This is the main function .
  * @author Rongrong Liu
  * @throws IOException 
  * @throws FileNotFoundException 
@@ -18,13 +18,13 @@ public class runner {
 		Graph g = reader.readCSV(args[0]);
 		String flag = "Y";
 		String option = "0";
-		System.out.println("Welcome to Restaruant Recommendation System");		
+		System.out.println("Welcome to Yelp Lite (patent pending)!");		
 		while (flag.equals("Y")) {
 			System.out.println("Please enter the user ID: ");
 			Scanner sc = new Scanner(System.in);
 			String userID = sc.nextLine();
 			System.out.println("Do you want to set threshold of minimal rating or minimal number of co-reviewers? ");
-			System.out.println("1 for minimal rating, 2 for minimal number of co-reviewer");
+			System.out.println("1 for minimal rating. 2 for minimal number of co-reviewer");
 			option = sc.nextLine();
 			if (option.equals("1")) {
 				System.out.println("Please set a threshold of the minimal rating: ");
@@ -46,7 +46,6 @@ public class runner {
 							System.out.println("recommendation: " + rw.getID() + ", avgRating: " + rw.getAvgRating() + ", corating: " + rw.getAvgRating());
 						}
 					}
-					//TODO: printout list of restaurants
 				}
 			}
 			else if (option.equals("2")) {
@@ -69,9 +68,9 @@ public class runner {
 			System.out.println("Would you like another try? Enter Y or N:");
 			flag = sc.nextLine();
 		}
-		System.out.println("Thank you for using the recommendation System");
-		
-		//user "RQU7dwZTdCLfy7DQU2TYlQ" no rec found as he only reviews one rest and he is the only one who reviewed the rest 
-		//user "4OrFB2TDRsbokoYMhUf1EA" reviewed rest VeiGa7h8p1I2yAIfgZjgtw
-		}
+		System.out.println("Thank you for using Yelp Lite (patent pending).");
+	}
 }
+
+//user "RQU7dwZTdCLfy7DQU2TYlQ" no rec found as he only reviews one rest and he is the only one who reviewed the rest 
+//user "4OrFB2TDRsbokoYMhUf1EA" reviewed rest VeiGa7h8p1I2yAIfgZjgtw
