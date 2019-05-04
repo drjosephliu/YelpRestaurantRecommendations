@@ -2,7 +2,10 @@ import java.util.*;
 
 /**
  * 
- * @author TheSuperbGarfield
+ * This class represents a binary search tree. Most of the method
+ * implementations are inspired by those the textbook.
+ * 
+ * @author Keenan Park
  *
  */
 public class BST {
@@ -28,7 +31,7 @@ public class BST {
 	public int size() {
 		return nodeCount;
 	}
-	
+
 	/**
 	 * This method creates a BSTNode2 from a RestaurantWrapper. If the
 	 * RestaurantWrapper doesn't already exist in the BST, it gets inserted in the
@@ -75,8 +78,8 @@ public class BST {
 	}
 
 	/**
-	 * This is a recursive helper method for removing a RestaurantWrapper
-	 * from the BST.
+	 * This is a recursive helper method for removing a RestaurantWrapper from the
+	 * BST.
 	 * 
 	 * @param root
 	 * @param key
@@ -137,28 +140,29 @@ public class BST {
 	 * @param threshold is threshold rating
 	 * @return list of recommended restaurants that meet the threshold
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RestaurantWrapper> findThreshold(double threshold) {
-		List<RestaurantWrapper> ret = new ArrayList<>();
+		Deque<RestaurantWrapper> ret = new LinkedList<>();
 		inOrderTraversal(root, ret, threshold);
-		return ret;
+		return (List<RestaurantWrapper>) ret;
 	}
 
 	/**
 	 * This method performs an in order traversal for nodes with average rating
-	 * greater than or equal to the threshold. The list parameter is populated
-	 * with the RestaurantWrappers encapsulated by each node.
+	 * greater than or equal to the threshold. The list parameter is populated with
+	 * the RestaurantWrappers encapsulated by each node.
 	 * 
 	 * @param root
-	 * @param list
+	 * @param deque
 	 * @param threshold
 	 */
-	private void inOrderTraversal(BSTNode root, List<RestaurantWrapper> list, double threshold) {
+	private void inOrderTraversal(BSTNode root, Deque<RestaurantWrapper> list, double threshold) {
 		if (root == null) {
 			return;
-		}	
+		}
 		if (threshold <= root.getRestaurantWrapper().getAvgRating()) {
 			inOrderTraversal(root.getLeft(), list, threshold);
-			list.add(root.getRestaurantWrapper());
+			list.addFirst(root.getRestaurantWrapper());
 		}
 
 		inOrderTraversal(root.getRight(), list, threshold);

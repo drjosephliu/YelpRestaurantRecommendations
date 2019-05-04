@@ -1,5 +1,11 @@
 import java.util.HashMap;
 
+/**
+ * Instances of this class represent users in the graph.
+ * 
+ * @author Keenan Park
+ *
+ */
 public class UserNode implements INode {
 	private String id;
 	private HashMap<String, Double> ratings = new HashMap<String, Double>();
